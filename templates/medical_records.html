@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block heading %} Medical Records {% endblock %}
+
+{% block content %}
+{% if medical_records %}
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">RecordID</th>
+                <th scope="col">PatientID</th>
+                <th scope="col">Diagnosis</th>
+                <th scope="col">Treatment</th>
+                <th scope="col">Prescription</th>
+                <th scope="col">DateRecorded</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for med_record in medical_records %}
+            <tr>
+                <td scope="row">{{med_record["RecordID"]}}</th>
+                <td>{{med_record["PatientID"]}}</td>
+                <td>{{med_record["Diagnosis"]}}</td>
+                <td>{{med_record["Treatment"]}}</td>
+                <td>{{med_record["Prescription"]}}</td>
+                <td>{{med_record["DateRecorded"]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="card">
+        <div class="card-body">
+            Medical records not available
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

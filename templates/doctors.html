@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% block heading %} Doctors {% endblock %}
+
+{% block content %}
+{% if doctors %}
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">DoctorID</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Specialization</th>
+                <th scope="col">ContactNumber</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in doctors %}
+            <tr>
+                <td scope="row">{{doc["DoctorID"]}}</th>
+                <td>{{doc["FirstName"]}}</td>
+                <td>{{doc["LastName"]}}</td>
+                <td>{{doc["Specialization"]}}</td>
+                <td>{{doc["ContactNumber"]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="card">
+        <div class="card-body">
+            Doctors records not available
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

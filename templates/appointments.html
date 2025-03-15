@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% block heading %} Appointments {% endblock %}
+
+{% block content %}
+{% if appointments %}
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">AppointmentID</th>
+                <th scope="col">PatientID</th>
+                <th scope="col">DoctorID</th>
+                <th scope="col">AppointmentDate</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appt in appointments %}
+            <tr>
+                <td scope="row">{{appt["AppointmentID"]}}</th>
+                <td>{{appt["PatientID"]}}</td>
+                <td>{{appt["DoctorID"]}}</td>
+                <td>{{appt["AppointmentDate"]}}</td>
+                <td>{{appt["Status"]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="card">
+        <div class="card-body">
+            Appointment records not available
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

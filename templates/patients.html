@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+{% from 'bootstrap5/form.html' import render_form, render_field, render_form_row %}
+7{% from 'font_awesome.html' import render_icon, render_stacked_icons %}
+
+{% block heading %} Patients {% endblock %}
+
+{% block content %}
+{% if form %}
+<div class="container">
+    {{ render_form(form)}}
+</div>
+{% endif %}
+
+{% if patients %}
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">PatientID</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Date Of Birth</th>
+                <th scope="col">Gender</th>
+                <th scope="col">ContactNumber</th>
+                <th scope="col">Address</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                <td scope="row">{{patient["PatientID"]}}</th>
+                <td>{{patient["FirstName"]}}</td>
+                <td>{{patient["LastName"]}}</td>
+                <td>{{patient["DOB"]}}</td>
+                <td>{{patient["Gender"]}}</td>
+                <td>{{patient["ContactNumber"]}}</td>
+                <td>{{patient["Address"]}}</td>
+                <td>
+                    <a class="patient_edit" href="{{url_for("patients.patients", edit='yes', user_id=patient["PatientID"])}}">
+                        {{ render_icon('fas fa-pen-to-square') }}
+                    </a>
+                    <a class="patient_delete" href="{{url_for("patients.delete_patients_record",
+                        patientId=patient["PatientID"])}}">
+                        {{ render_icon('fas fa-trash') }}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="card">
+        <div class="card-body">
+            Patients records not available
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
