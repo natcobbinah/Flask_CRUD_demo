@@ -10,10 +10,10 @@ gender_choices = (
 
 
 class PatientForm(FlaskForm):
-    FirstName = StringField('FirstName', validators=[DataRequired()])
-    LastName = StringField('LastName', validators=[DataRequired()])
-    DOB = DateField('Date Of Birth', validators=[DataRequired()])
-    Gender = RadioField('Gender', choices=gender_choices)
-    ContactNumber = StringField('ContactNumber', validators=[DataRequired()])
-    Address = StringField('Address', validators=[DataRequired()])
-    submit = SubmitField(label='Save')
+    FirstName = StringField("FirstName", validators=[DataRequired()])
+    LastName = StringField("LastName", validators=[DataRequired()])
+    DOB = DateField("Date Of Birth", validators=[DataRequired()])
+    Gender = RadioField("Gender", choices=gender_choices)
+    ContactNumber = StringField("ContactNumber", validators=[DataRequired()])
+    Address = StringField("Address", validators=[DataRequired()])
+    submit = SubmitField(label="Save")

@@ -6,19 +6,21 @@ from .db_data import (
     prepopulate_records_into_doctors_table,
     prepopulate_records_into_appointments_table,
     prepopulate_records_into_medical_records_table,
-    prepopulate_records_into_billing_records_table
+    prepopulate_records_into_billing_records_table,
 )
 from .models import Patients, Doctors, MedicalRecords, Appointments, Billing
 from flask_wtf.csrf import CSRFProtect
 from flask_bootstrap import Bootstrap5
 from sqlalchemy import insert, select
+from .routes import (
+    appointment_records_bp,
+    billing_records_bp,
+    doctors_records_bp,
+    medical_records_bp,
+    patient_bp,
+    homepage_bp,
+)
 
-from .appointments_routes import appointment_records_bp
-from .billing_routes import billing_records_bp
-from .doctors_routes import doctors_records_bp
-from .medicalrecord_routes import medical_records_bp
-from .patients_routes import patient_bp
-from .index_route import homepage_bp
 
 app = Flask(__name__)
 app.config.from_object("maurs_hospital.settings")

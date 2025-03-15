@@ -1,12 +1,13 @@
 from flask import Blueprint, render_template
 from sqlalchemy import insert, select
-from .database import db
-from .models import Doctors
+from maurs_hospital.database import db
+from maurs_hospital.models import Doctors
 
 # HTML FILES
-DOCTORS_HTML = 'doctors.html'
+DOCTORS_HTML = "doctors.html"
 
-doctors_records_bp = Blueprint('doctors', __name__)
+doctors_records_bp = Blueprint("doctors", __name__)
+
 
 @doctors_records_bp.route("/doctors")
 def doctors():
@@ -24,7 +25,4 @@ def doctors():
         for doctor_record in result
     ]
 
-    return render_template(
-        DOCTORS_HTML,
-        doctors=db_doctors
-    )
+    return render_template(DOCTORS_HTML, doctors=db_doctors)
