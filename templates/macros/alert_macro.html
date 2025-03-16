@@ -1,0 +1,6 @@
+{% macro alert_message(flash_message, alert_type) %}
+<div class="alert alert-{{alert_type}} alert-dismissible" role="alert">
+    <div>{{flash_message}}</div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endmacro %}

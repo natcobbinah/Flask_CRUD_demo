@@ -1,10 +1,29 @@
 {% extends 'index.html' %}
 {% from 'bootstrap5/form.html' import render_form, render_field, render_form_row %}
-7{% from 'font_awesome.html' import render_icon, render_stacked_icons %}
+{% from 'font_awesome.html' import render_icon, render_stacked_icons %}
+{% from 'macros/alert_macro.html' import alert_message %}
 
-{% block heading %} Patients {% endblock %}
+{% block heading %}
+<div class="container text-center">
+    <div class="row justify-content-center">
+        <p class="h3"> Patients</p>
+    </div>
+</div>
+{% endblock %}
+
 
 {% block content %}
+<!--Render flash messages for user feedback if any-->
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    {{alert_message(flash_message=message, alert_type='success')}}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
 {% if form %}
 <div class="container">
     {{ render_form(form)}}
@@ -37,7 +56,8 @@
                 <td>{{patient["ContactNumber"]}}</td>
                 <td>{{patient["Address"]}}</td>
                 <td>
-                    <a class="patient_edit" href="{{url_for("patients.patients", edit='yes', user_id=patient["PatientID"])}}">
+                    <a class="patient_edit" href="{{url_for("patients.patients", edit='yes' ,
+                        user_id=patient["PatientID"])}}">
                         {{ render_icon('fas fa-pen-to-square') }}
                     </a>
                     <a class="patient_delete" href="{{url_for("patients.delete_patients_record",

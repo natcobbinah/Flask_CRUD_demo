@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request, url_for
+from flask import Blueprint, render_template, redirect, request, url_for, flash
 from sqlalchemy import insert, select, delete, update
 from maurs_hospital.database import db
 from maurs_hospital.models import Patients
@@ -58,10 +58,11 @@ def delete_patients_record(patientId):
     db.session.execute(stmt)
     db.session.commit()
 
+    flash('Patient record was deleted successfully')
     return redirect(url_for("patients.patients"))
 
 
-def prepopulate_form_fields(user_id_to_edit):
+def prepopulate_form_fields(user_id_to_edit:int) -> PatientForm :
     stmt_patient_records = select(Patients).where(Patients.PatientID == user_id_to_edit)
     result = db.session.execute(stmt_patient_records).scalars().all()
 
@@ -95,7 +96,7 @@ def prepopulate_form_fields(user_id_to_edit):
     return patients_form
 
 
-def create_new_patient_or_update_record(form_data, user_id_to_edit):
+def create_new_patient_or_update_record(form_data: MultiDict, user_id_to_edit: int) -> None:
     current_patient_table_index = db.session.query(Patients).count()
 
     if user_id_to_edit is not None:
@@ -121,6 +122,8 @@ def create_new_patient_or_update_record(form_data, user_id_to_edit):
             )
             db.session.execute(stmt)
             db.session.commit()
+
+            flash('Patient record was updated successfully')
     else:
 
         insert_current_record_to_patient_table = insert(Patients).values(
@@ -136,3 +139,5 @@ def create_new_patient_or_update_record(form_data, user_id_to_edit):
         )
         db.session.execute(insert_current_record_to_patient_table)
         db.session.commit()
+
+        flash('Patient record was created successfully')
